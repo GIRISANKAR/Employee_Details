@@ -3,28 +3,27 @@ package com.htc.resources.model;
 import javax.persistence.*;
 
 /**
- * Created by giris on 24/1/20.
+ * Created by giris on 17/2/20.
  */
 @Entity
 @Table
-public class Skill {
+public class EmployeeSkill {
+    @Id
+    @Column
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int skillId;
 
-     @Id
-     @Column
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private int skillId;
+    @ManyToOne
+    @JoinColumn(name = "emp_id")
+    private Employee employee;
 
-     @ManyToOne
-     @JoinColumn(name = "emp_id")
-     private Employee employee;
+    @Column
+    private String skillName;
 
-     @Column
-     private String skillName;
+    @Column
+    private int experience;
 
-     @Column
-     private int experience;
-
-    public Skill() {
+    public EmployeeSkill() {
     }
 
     public int getSkillId() {

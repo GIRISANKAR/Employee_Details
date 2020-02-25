@@ -1,6 +1,7 @@
 package com.htc.resources.service;
 
 import com.htc.resources.model.Employee;
+import com.htc.resources.model.Response;
 import com.htc.resources.request.EmployeeRequest;
 import com.htc.resources.response.EmployeeResponse;
 
@@ -12,10 +13,8 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    void createOrUpdateEmployee(EmployeeRequest employeeRequest);
-    List<EmployeeRequest> getEmployeeRequestList();
+    Response createOrUpdateEmployee(EmployeeRequest employeeRequest);
     List<EmployeeResponse> getEmployeeList();
-    List<Employee> findByEmpId(int employeeId);
     void deleteEmployee(int employee);
 
 }

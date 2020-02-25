@@ -2,8 +2,6 @@ package com.htc.resources.dao;
 
 import com.htc.resources.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.time.LocalDate;
 import java.util.List;
 
 /**

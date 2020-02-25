@@ -2,7 +2,6 @@ package com.htc.resources.service;
 
 
 import com.htc.resources.dao.ProjectRepository;
-import com.htc.resources.model.Employee;
 import com.htc.resources.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,9 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectRepository projectRepository;
 
 
-    public List<Project> getEmployeesByProject(String projectName){
+    public List<Project> getProjectList(){
 
-        List<Project> availableEmployeeList = projectRepository.findByProjectName(projectName);
-            return null;
+        List<Project> availableProjectList = projectRepository.findAll();
+            return availableProjectList;
     }
 }

@@ -1,7 +1,5 @@
 package com.htc.resources.model;
 
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -30,18 +28,20 @@ public class Employee {
     private int htcExperience;
 
     @Column
-    private  int overallExperience;
+    private int overallExperience;
+
+    @Column
+    private String primarySkills;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "personal_details_id")
     private PersonalDetails personalDetails;
 
-    @OneToMany(mappedBy = "employee" , cascade = {CascadeType.ALL})
-    private List<Skill> skillList;
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
+    private List<EmployeeSkill> skillList;
 
-    @OneToMany(mappedBy = "employee" , cascade = {CascadeType.ALL})
-    private List<Project> projectList;
-
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
+    private List<EmployeeProject> projectList;
 
 
     @Column
@@ -93,19 +93,19 @@ public class Employee {
         this.personalDetails = personalDetails;
     }
 
-    public List<Skill> getSkillList() {
+    public List<EmployeeSkill> getSkillList() {
         return skillList;
     }
 
-    public void setSkillList(List<Skill> skillList) {
+    public void setSkillList(List<EmployeeSkill> skillList) {
         this.skillList = skillList;
     }
 
-    public List<Project> getProjectList() {
+    public List<EmployeeProject> getProjectList() {
         return projectList;
     }
 
-    public void setProjectList(List<Project> projectList) {
+    public void setProjectList(List<EmployeeProject> projectList) {
         this.projectList = projectList;
     }
 
@@ -139,5 +139,13 @@ public class Employee {
 
     public void setOverallExperience(int overallExperience) {
         this.overallExperience = overallExperience;
+    }
+
+    public String getPrimarySkills() {
+        return primarySkills;
+    }
+
+    public void setPrimarySkills(String primarySkills) {
+        this.primarySkills = primarySkills;
     }
 }

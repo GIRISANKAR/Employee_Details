@@ -1,7 +1,6 @@
 package com.htc.resources.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by giris on 27/1/20.
@@ -24,7 +23,10 @@ public class PersonalDetails {
     private int extensionNumber;
 
     @Column
-    private long mobileNumber;
+    private String mobileNumber;
+
+    @Column
+    private String alternativeMobileNumber;
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -59,12 +61,20 @@ public class PersonalDetails {
         this.extensionNumber = extensionNumber;
     }
 
-    public long getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getAlternativeMobileNumber() {
+        return alternativeMobileNumber;
+    }
+
+    public void setAlternativeMobileNumber(String alternativeMobileNumber) {
+        this.alternativeMobileNumber = alternativeMobileNumber;
     }
 
     public int getPersonalDetailsId() {

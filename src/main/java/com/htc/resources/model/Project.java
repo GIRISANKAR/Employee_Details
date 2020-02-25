@@ -2,8 +2,9 @@ package com.htc.resources.model;
 
 import javax.persistence.*;
 
+
 /**
- * Created by giris on 27/1/20.
+ * Created by giris on 17/2/20.
  */
 @Entity
 @Table
@@ -13,21 +14,17 @@ public class Project {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int projectId;
 
-    @ManyToOne
-    @JoinColumn(name = "emp_id")
-    private Employee employee;
-
     @Column
     private String projectName;
 
     @Column
-    private String reportingTo;
+    private String projectDescription;
 
     @Column
     private String deliveryHead;
 
     @Column
-    private boolean active;
+    private  String skillSet;
 
     public Project() {
     }
@@ -40,14 +37,6 @@ public class Project {
         this.projectId = projectId;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public String getProjectName() {
         return projectName;
     }
@@ -56,12 +45,12 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getReportingTo() {
-        return reportingTo;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setReportingTo(String reportingTo) {
-        this.reportingTo = reportingTo;
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
     public String getDeliveryHead() {
@@ -72,11 +61,12 @@ public class Project {
         this.deliveryHead = deliveryHead;
     }
 
-    public boolean getActive() {
-        return active;
+    public String getSkillSet() {
+        return skillSet;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setSkillSet(String skillSet) {
+        this.skillSet = skillSet;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.htc.resources.request;
 
+
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class EmployeeRequest {
 
     private  int overallExperience;
 
+    private String primarySkills;
 
     private int personalDetailsId;
 
@@ -28,7 +30,9 @@ public class EmployeeRequest {
 
     private int extensionNumber;
 
-    private long mobileNumber;
+    private String mobileNumber;
+
+    private String alternativeMobileNumber;
 
     private int addressId;
 
@@ -131,12 +135,20 @@ public class EmployeeRequest {
         this.extensionNumber = extensionNumber;
     }
 
-    public long getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getAlternativeMobileNumber() {
+        return alternativeMobileNumber;
+    }
+
+    public void setAlternativeMobileNumber(String alternativeMobileNumber) {
+        this.alternativeMobileNumber = alternativeMobileNumber;
     }
 
     public int getAddressId() {
@@ -197,6 +209,14 @@ public class EmployeeRequest {
 
     public List<ProjectRequest> getProjects() {
         return projects;
+    }
+
+    public String getPrimarySkills() {
+        return primarySkills;
+    }
+
+    public void setPrimarySkills(String primarySkills) {
+        this.primarySkills = primarySkills;
     }
 
     public void setProjects(List<ProjectRequest> projects) {

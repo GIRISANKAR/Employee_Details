@@ -1,26 +1,43 @@
-package com.htc.resources.request;
+package com.htc.resources.model;
 
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by giris on 27/1/20.
  */
-public class ProjectRequest {
-
+@Entity
+@Table
+public class EmployeeProject {
+    @Id
+    @Column
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int employeeProjectId;
 
-    private int projectId;
+    @ManyToOne
+    @JoinColumn(name = "emp_id")
+    private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name="project_id")
+    private Project project;
+
+    @Column
     private String reportingTo;
 
+    @Column
     private String location;
 
-    private String startDate;
+    @Column
+    private Date startDate;
 
-    private String endDate;
+    @Column
+    private Date endDate;
 
+    @Column
     private boolean active;
 
-    public ProjectRequest() {
+    public EmployeeProject() {
     }
 
     public int getEmployeeProjectId() {
@@ -31,13 +48,22 @@ public class ProjectRequest {
         this.employeeProjectId = employeeProjectId;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
 
     public String getReportingTo() {
         return reportingTo;
@@ -55,19 +81,19 @@ public class ProjectRequest {
         this.location = location;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

@@ -1,8 +1,5 @@
 package com.htc.resources.response;
 
-import com.htc.resources.model.Project;
-import com.htc.resources.model.Skill;
-
 import java.util.List;
 
 /**
@@ -21,13 +18,17 @@ public class EmployeeResponse {
 
     private  int overallExperience;
 
+    private String primarySkills;
+
     private String officialEmailAddr;
 
     private String EmailAddr;
 
     private int extensionNumber;
 
-    private long mobileNumber;
+    private String mobileNumber;
+
+    private String alternativeMobileNumber;
 
     private int addressId;
 
@@ -42,6 +43,8 @@ public class EmployeeResponse {
     private String country;
 
     private int pincode;
+
+    private String projectName;
 
     private List<ProjectResponse> projects;
 
@@ -119,12 +122,28 @@ public class EmployeeResponse {
         this.extensionNumber = extensionNumber;
     }
 
-    public long getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getAlternativeMobileNumber() {
+        return alternativeMobileNumber;
+    }
+
+    public void setAlternativeMobileNumber(String alternativeMobileNumber) {
+        this.alternativeMobileNumber = alternativeMobileNumber;
+    }
+
+    public String getPrimarySkills() {
+        return primarySkills;
+    }
+
+    public void setPrimarySkills(String primarySkills) {
+        this.primarySkills = primarySkills;
     }
 
     public String getAddressLine() {
@@ -199,5 +218,11 @@ public class EmployeeResponse {
         this.personalDetailsId = personalDetailsId;
     }
 
+    public String getProjectName() {
+        return projectName;
+    }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 }
