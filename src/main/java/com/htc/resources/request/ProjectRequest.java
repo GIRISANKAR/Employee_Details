@@ -1,81 +1,50 @@
 package com.htc.resources.request;
 
-
 /**
- * Created by giris on 27/1/20.
+ * Created by giris on 27/2/20.
  */
 public class ProjectRequest {
 
-    private int employeeProjectId;
+    private String projectName;
 
-    private int projectId;
+    private String projectDescription;
 
-    private String reportingTo;
+    private String deliveryHead;
 
-    private String location;
-
-    private String startDate;
-
-    private String endDate;
-
-    private boolean active;
+    private  String skillSet;
 
     public ProjectRequest() {
     }
 
-    public int getEmployeeProjectId() {
-        return employeeProjectId;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setEmployeeProjectId(int employeeProjectId) {
-        this.employeeProjectId = employeeProjectId;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
-    public String getReportingTo() {
-        return reportingTo;
+    public String getDeliveryHead() {
+        return deliveryHead;
     }
 
-    public void setReportingTo(String reportingTo) {
-        this.reportingTo = reportingTo;
+    public void setDeliveryHead(String deliveryHead) {
+        this.deliveryHead = deliveryHead;
     }
 
-    public String getLocation() {
-        return location;
+    public String getSkillSet() {
+        return skillSet;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setSkillSet(String skillSet) {
+        this.skillSet = skillSet;
     }
 }

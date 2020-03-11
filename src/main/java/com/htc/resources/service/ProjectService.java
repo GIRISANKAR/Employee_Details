@@ -2,6 +2,8 @@ package com.htc.resources.service;
 
 
 import com.htc.resources.model.Project;
+import com.htc.resources.model.Response;
+import com.htc.resources.request.ProjectRequest;
 
 import java.util.List;
 
@@ -11,4 +13,5 @@ import java.util.List;
 
 public interface ProjectService  {
     List<Project> getProjectList();
+     Response createProject(ProjectRequest projectRequest);
 }

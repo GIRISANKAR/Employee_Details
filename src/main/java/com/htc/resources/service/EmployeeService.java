@@ -15,6 +15,6 @@ public interface EmployeeService {
 
     Response createOrUpdateEmployee(EmployeeRequest employeeRequest);
     List<EmployeeResponse> getEmployeeList();
-    void deleteEmployee(int employee);
+    void inactiveEmployee(int empId);
 
 }

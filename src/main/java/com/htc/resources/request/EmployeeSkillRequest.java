@@ -3,13 +3,13 @@ package com.htc.resources.request;
 /**
  * Created by giris on 27/1/20.
  */
-public class SkillRequest {
+public class EmployeeSkillRequest {
 
     private int skillId;
     private String skillName;
     private int experience;
 
-    public SkillRequest() {
+    public EmployeeSkillRequest() {
     }
 
     public String getSkillName() {

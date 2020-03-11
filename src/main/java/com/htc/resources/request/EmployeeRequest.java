@@ -46,11 +46,16 @@ public class EmployeeRequest {
 
     private int pincode;
 
-    //@JsonIgnore
-    private List<SkillRequest> skills;
+    private boolean active;
+
 
     //@JsonIgnore
-    private List<ProjectRequest> projects;
+    private List<EmployeeSkillRequest> skills;
+
+    //@JsonIgnore
+    private List<EmployeeProjectRequest> projects;
+
+    private List<TrainingRequest> trainings;
 
     public EmployeeRequest() {
     }
@@ -199,15 +204,15 @@ public class EmployeeRequest {
         this.pincode = pincode;
     }
 
-    public List<SkillRequest> getSkills() {
+    public List<EmployeeSkillRequest> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<SkillRequest> skills) {
+    public void setSkills(List<EmployeeSkillRequest> skills) {
         this.skills = skills;
     }
 
-    public List<ProjectRequest> getProjects() {
+    public List<EmployeeProjectRequest> getProjects() {
         return projects;
     }
 
@@ -219,9 +224,23 @@ public class EmployeeRequest {
         this.primarySkills = primarySkills;
     }
 
-    public void setProjects(List<ProjectRequest> projects) {
+    public void setProjects(List<EmployeeProjectRequest> projects) {
         this.projects = projects;
     }
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public List<TrainingRequest> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(List<TrainingRequest> trainings) {
+        this.trainings = trainings;
+    }
 }

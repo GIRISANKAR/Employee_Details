@@ -4,7 +4,7 @@ package com.htc.resources.response;
 /**
  * Created by giris on 10/2/20.
  */
-public class ProjectResponse {
+public class EmployeeProjectResponse {
 
     private int EmployeeProjectId;
 
@@ -28,7 +28,7 @@ public class ProjectResponse {
 
     private boolean active;
 
-    public ProjectResponse() {
+    public EmployeeProjectResponse() {
     }
 
     public int getEmployeeProjectId() {

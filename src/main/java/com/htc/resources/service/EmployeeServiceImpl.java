@@ -5,11 +5,13 @@ import com.htc.resources.dao.EmployeeRepository;
 import com.htc.resources.dao.ProjectRepository;
 import com.htc.resources.model.*;
 import com.htc.resources.request.EmployeeRequest;
-import com.htc.resources.request.ProjectRequest;
-import com.htc.resources.request.SkillRequest;
+import com.htc.resources.request.EmployeeProjectRequest;
+import com.htc.resources.request.EmployeeSkillRequest;
+import com.htc.resources.request.TrainingRequest;
 import com.htc.resources.response.EmployeeResponse;
-import com.htc.resources.response.ProjectResponse;
-import com.htc.resources.response.SkillResponse;
+import com.htc.resources.response.EmployeeProjectResponse;
+import com.htc.resources.response.EmployeeSkillResponse;
+import com.htc.resources.response.TrainingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.text.DateFormat;
@@ -42,36 +44,41 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employeeList = employeeRepository.findAll();
         for (Employee employees : employeeList) {
             EmployeeResponse employeeResponse = new EmployeeResponse();
-            employeeResponse.setEmpId(employees.getEmpId());
-            employeeResponse.setEmpName(employees.getEmpName());
-            employeeResponse.setDesignation(employees.getDesignation());
-            employeeResponse.setPrimaryWorkLocation(employees.getPrimaryWorkLocation());
-            employeeResponse.setHtcExperience(employees.getHtcExperience());
-            employeeResponse.setOverallExperience(employees.getOverallExperience());
-            employeeResponse.setPrimarySkills(employees.getPrimarySkills());
-            employeeResponse.setPersonalDetailsId(employees.getPersonalDetails().getPersonalDetailsId());
-            employeeResponse.setOfficialEmailAddr(employees.getPersonalDetails().getOfficialEmailAddr());
-            employeeResponse.setEmailAddr(employees.getPersonalDetails().getEmailAddr());
-            employeeResponse.setExtensionNumber(employees.getPersonalDetails().getExtensionNumber());
-            employeeResponse.setMobileNumber(employees.getPersonalDetails().getMobileNumber());
-            employeeResponse.setAlternativeMobileNumber(employees.getPersonalDetails().getAlternativeMobileNumber());
-            employeeResponse.setAddressId(employees.getPersonalDetails().getAddress().getAddressId());
-            employeeResponse.setAddressLine(employees.getPersonalDetails().getAddress().getAddressLine());
-            employeeResponse.setCity(employees.getPersonalDetails().getAddress().getCity());
-            employeeResponse.setState(employees.getPersonalDetails().getAddress().getState());
-            employeeResponse.setCountry(employees.getPersonalDetails().getAddress().getCountry());
-            employeeResponse.setPincode(employees.getPersonalDetails().getAddress().getPincode());
-            prepareProjectResponse(employees.getProjectList(), employeeResponse);
-            prepareSkillResponse(employees.getSkillList(), employeeResponse);
-            employeeResponseList.add(employeeResponse);
+            if (employees.isActive() == true) {
+                employeeResponse.setEmpId(employees.getEmpId());
+                employeeResponse.setEmpName(employees.getEmpName());
+                employeeResponse.setDesignation(employees.getDesignation());
+                employeeResponse.setPrimaryWorkLocation(employees.getPrimaryWorkLocation());
+                employeeResponse.setHtcExperience(employees.getHtcExperience());
+                employeeResponse.setOverallExperience(employees.getOverallExperience());
+                employeeResponse.setPrimarySkills(employees.getPrimarySkills());
+                employeeResponse.setActive(employees.isActive());
+                employeeResponse.setPersonalDetailsId(employees.getPersonalDetails().getPersonalDetailsId());
+                employeeResponse.setOfficialEmailAddr(employees.getPersonalDetails().getOfficialEmailAddr());
+                employeeResponse.setEmailAddr(employees.getPersonalDetails().getEmailAddr());
+                employeeResponse.setExtensionNumber(employees.getPersonalDetails().getExtensionNumber());
+                employeeResponse.setMobileNumber(employees.getPersonalDetails().getMobileNumber());
+                employeeResponse.setAlternativeMobileNumber(employees.getPersonalDetails().getAlternativeMobileNumber());
+                employeeResponse.setAddressId(employees.getPersonalDetails().getAddress().getAddressId());
+                employeeResponse.setAddressLine(employees.getPersonalDetails().getAddress().getAddressLine());
+                employeeResponse.setCity(employees.getPersonalDetails().getAddress().getCity());
+                employeeResponse.setState(employees.getPersonalDetails().getAddress().getState());
+                employeeResponse.setCountry(employees.getPersonalDetails().getAddress().getCountry());
+                employeeResponse.setPincode(employees.getPersonalDetails().getAddress().getPincode());
+                prepareProjectResponse(employees.getProjectList(), employeeResponse);
+                prepareSkillResponse(employees.getSkillList(), employeeResponse);
+                prepareTrainingResponse(employees.getTrainingList(),employeeResponse);
+                employeeResponseList.add(employeeResponse);
+            }
         }
-
         return employeeResponseList;
     }
 
     @Override
-    public void deleteEmployee(int employee) {
-        employeeRepository.deleteById(employee);
+    public void inactiveEmployee(int empId) {
+         Employee employee = employeeRepository.findByEmpId(empId);
+         employee.setActive(false);
+         employeeRepository.save(employee);
     }
 
     @Override
@@ -106,6 +113,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setActive(true);
         prepareSkill(employeeRequest.getSkills(), employee);
         prepareProject(employeeRequest.getProjects(), employee);
+        prepareTraining(employeeRequest.getTrainings(),employee);
     }
 
     private void preparePersonalDetails(EmployeeRequest employeeRequest, PersonalDetails personalDetails, Employee employee) throws Exception{
@@ -129,9 +137,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         address.setPincode(employeeRequest.getPincode());
     }
 
-    private void prepareSkill(List<SkillRequest> skillList, Employee employee) throws Exception{
+    private void prepareSkill(List<EmployeeSkillRequest> skillList, Employee employee) throws Exception{
         List<EmployeeSkill> skills = new ArrayList<>();
-        for (SkillRequest skillRequest : skillList) {
+        for (EmployeeSkillRequest skillRequest : skillList) {
             EmployeeSkill skill = new EmployeeSkill();
             skill.setSkillId(skillRequest.getSkillId());
             skill.setSkillName(skillRequest.getSkillName());
@@ -143,11 +151,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-    private void prepareProject(List<ProjectRequest> projectRequestList, Employee employee) throws Exception{
+    private void prepareProject(List<EmployeeProjectRequest> projectRequestList, Employee employee) throws Exception{
 
 
         List<EmployeeProject> projects = new ArrayList<>();
-        for (ProjectRequest projectRequest : projectRequestList) {
+        for (EmployeeProjectRequest projectRequest : projectRequestList) {
             EmployeeProject project = new EmployeeProject();
             project.setEmployeeProjectId(projectRequest.getEmployeeProjectId());
             project.setProject(projectRepository.findById(projectRequest.getProjectId()).get());
@@ -161,11 +169,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         employee.setProjectList(projects);
     }
+    private void prepareTraining(List<TrainingRequest> trainingRequestsList, Employee employee) throws Exception{
+        List<Training> trainings= new ArrayList<>();
+        for (TrainingRequest trainingRequest : trainingRequestsList) {
+            Training training = new Training();
+            training.setTrainingId(trainingRequest.getTrainingId());
+            training.setNameOfTraining(trainingRequest.getNameOfTraining());
+            training.setDuration(trainingRequest.getDuration());
+            training.setTrainingDescription(trainingRequest.getTrainingDescription());
+            training.setEmployee(employee);
+            trainings.add(training);
+        }
+        employee.setTrainingList(trainings);
+    }
 
     private void prepareSkillResponse(List<EmployeeSkill> skillList, EmployeeResponse employeeResponse) {
-        List<SkillResponse> skillResponses = new ArrayList<>();
+        List<EmployeeSkillResponse> skillResponses = new ArrayList<>();
         for (EmployeeSkill skill : skillList) {
-            SkillResponse skillResponse = new SkillResponse();
+            EmployeeSkillResponse skillResponse = new EmployeeSkillResponse();
             skillResponse.setSkillId(skill.getSkillId());
             skillResponse.setSkillName(skill.getSkillName());
             skillResponse.setExperience(skill.getExperience());
@@ -177,11 +198,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private void prepareProjectResponse(List<EmployeeProject> projectList, EmployeeResponse employeeResponse) {
 
-        List<ProjectResponse> projectResponses = new ArrayList<>();
+        List<EmployeeProjectResponse> projectResponses = new ArrayList<>();
         String projectName = "" ;
         for (EmployeeProject project : projectList) {
-            if(project.isActive()) {
-                ProjectResponse projectResponse = new ProjectResponse();
+
+                EmployeeProjectResponse projectResponse = new EmployeeProjectResponse();
                 projectResponse.setEmployeeProjectId(project.getEmployeeProjectId());
                 projectResponse.setReportingTo(project.getReportingTo());
                 projectResponse.setStartDate(dateFormat.format(project.getStartDate()));
@@ -194,15 +215,29 @@ public class EmployeeServiceImpl implements EmployeeService {
                     projectResponse.setSkillset(project.getProject().getSkillSet());
                     projectResponse.setDeliveryHead(project.getProject().getDeliveryHead());
                     projectResponse.setProjectDescription(project.getProject().getProjectDescription());
-                    projectName = projectName + project.getProject().getProjectName() + ",";
+                    if(project.isActive()) {
+                        projectName = projectName + project.getProject().getProjectName() + ",";
+                    }
                 }
                 projectResponses.add(projectResponse);
-            }
         }
         if(projectName.length()>0) {
             employeeResponse.setProjectName(projectName.substring(0, projectName.length() - 1));
         }
         employeeResponse.setProjects(projectResponses);
+    }
+
+    private void prepareTrainingResponse(List<Training> trainingList, EmployeeResponse employeeResponse) {
+        List<TrainingResponse> trainingResponses = new ArrayList<>();
+        for (Training training : trainingList) {
+            TrainingResponse trainingResponse = new TrainingResponse();
+            trainingResponse.setTrainingId(training.getTrainingId());
+            trainingResponse.setNameOfTraining(training.getNameOfTraining());
+            trainingResponse.setTrainingDescription(training.getTrainingDescription());
+            trainingResponse.setDuration(training.getDuration());
+            trainingResponses.add(trainingResponse);
+        }
+        employeeResponse.setTrainings(trainingResponses);
     }
 
     protected Response prepareResponse(String message, List<String> errors, boolean isSuccess) {

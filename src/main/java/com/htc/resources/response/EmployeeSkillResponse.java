@@ -3,14 +3,14 @@ package com.htc.resources.response;
 /**
  * Created by giris on 10/2/20.
  */
-public class SkillResponse {
+public class EmployeeSkillResponse {
     private int skillId;
 
     private String skillName;
 
     private int experience;
 
-    public SkillResponse() {
+    public EmployeeSkillResponse() {
     }
 
     public String getSkillName() {

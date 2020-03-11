@@ -43,6 +43,8 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
     private List<EmployeeProject> projectList;
 
+    @OneToMany(mappedBy = "employee", cascade = {CascadeType.ALL})
+    private List<Training> trainingList;
 
     @Column
     private Date createdDate;
@@ -147,5 +149,13 @@ public class Employee {
 
     public void setPrimarySkills(String primarySkills) {
         this.primarySkills = primarySkills;
+    }
+
+    public List<Training> getTrainingList() {
+        return trainingList;
+    }
+
+    public void setTrainingList(List<Training> trainingList) {
+        this.trainingList = trainingList;
     }
 }

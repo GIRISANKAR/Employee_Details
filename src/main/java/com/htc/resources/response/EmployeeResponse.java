@@ -46,9 +46,14 @@ public class EmployeeResponse {
 
     private String projectName;
 
-    private List<ProjectResponse> projects;
+    private boolean active;
 
-    private List<SkillResponse> skills;
+
+    private List<EmployeeProjectResponse> projects;
+
+    private List<EmployeeSkillResponse> skills;
+
+    private List<TrainingResponse> trainings;
 
     public int getEmpId() {
         return empId;
@@ -186,19 +191,19 @@ public class EmployeeResponse {
         this.pincode = pincode;
     }
 
-    public List<ProjectResponse> getProjects() {
+    public List<EmployeeProjectResponse> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<ProjectResponse> projects) {
+    public void setProjects(List<EmployeeProjectResponse> projects) {
         this.projects = projects;
     }
 
-    public List<SkillResponse> getSkills() {
+    public List<EmployeeSkillResponse> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<SkillResponse> skills) {
+    public void setSkills(List<EmployeeSkillResponse> skills) {
         this.skills = skills;
     }
 
@@ -224,5 +229,21 @@ public class EmployeeResponse {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public List<TrainingResponse> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(List<TrainingResponse> trainings) {
+        this.trainings = trainings;
     }
 }
